@@ -1,6 +1,7 @@
 package com.jilinmei.bonuscalculator;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,7 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends Activity
+							implements RemovePersonDialogFragment.NoticeDialogListener {
 
 	private static final String DEBUG_TAG = "Debug";
 	
@@ -37,12 +39,24 @@ public class DetailActivity extends Activity {
 	}
 	
 	public void removePerson_Clicked(View view) {
+		DialogFragment dialogFragment = new RemovePersonDialogFragment();
+		dialogFragment.show(getFragmentManager().beginTransaction(), "removeperson");
+	}
+	
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        // User touched the dialog's positive button
 		TextView nameText = (TextView)findViewById(R.id.nameText);
 		String name = nameText.getText().toString();
 		db.removePerson(name);
 		finish();
 		Toast.makeText(this, "员工 [" + name + "] 已经被删除", Toast.LENGTH_SHORT).show();
-	}
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        // User touched the dialog's negative button
+    }
 	
 	protected void onResume() {
 		Cursor cursor = db.getPerson(name);

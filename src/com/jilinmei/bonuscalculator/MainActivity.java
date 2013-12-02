@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
     
 	public void computeBonus_Clicked(View view) {
 		DialogFragment dialogFragment = new AllBonusDialogFragment();
-		dialogFragment.show(getFragmentManager().beginTransaction(), "dialog");
+		dialogFragment.show(getFragmentManager().beginTransaction(), "allbonus");
 	}
 	
 	@Override
