@@ -18,5 +18,20 @@
         android:layout_height="wrap_content"
         android:text="请添加员工信息" />
     -->
+    
+	<Button
+        android:id = "@+id/computeBonus"
+	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="14dp"
+		android:layout_marginBottom="14dp"
+		android:layout_marginLeft="12dp"
+		android:layout_marginRight="12dp"
+        android:layout_below="@id/staffListView"
+		android:padding="4dp"
+		android:textSize="18sp"
+		android:gravity="center"
+        android:onClick="computeBonus_Clicked"
+        android:text="计算奖金" />
 
 </RelativeLayout>

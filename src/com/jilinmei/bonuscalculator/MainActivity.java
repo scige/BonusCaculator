@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -77,6 +78,11 @@ public class MainActivity extends Activity {
     	}
 	}
     
+	public void computeBonus_Clicked(View view) {
+		DialogFragment dialogFragment = new AllBonusDialogFragment();
+		dialogFragment.show(getFragmentManager().beginTransaction(), "dialog");
+	}
+	
 	@Override
 	protected void onResume() {
 		staffItems.clear();
