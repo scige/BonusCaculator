@@ -1,0 +1,125 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" >
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingLeft="10.0dip"
+        android:paddingTop="13.0dip"
+        android:paddingRight="10.0dip"
+        android:layout_marginTop="18.0dip"
+        android:layout_marginBottom="10.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:focusable="true"
+            android:descendantFocusability="afterDescendants"
+            android:paddingLeft="13.0dip"
+            android:paddingRight="13.0dip"
+            android:layout_width="fill_parent"
+            android:layout_height="46.0dip">
+            <TextView
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="姓名" />
+            <EditText
+                android:id = "@+id/nameEditText"
+                android:layout_gravity="center"
+                android:paddingRight="22.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22.0dip"
+                android:singleLine="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:focusable="true"
+            android:descendantFocusability="afterDescendants"
+            android:paddingLeft="13.0dip"
+            android:paddingRight="13.0dip"
+            android:layout_width="fill_parent"
+            android:layout_height="46.0dip">
+            <TextView
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="业绩" />
+            <EditText
+                android:id = "@+id/incomeEditText"
+                android:layout_gravity="center"
+                android:paddingRight="22.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22.0dip"
+                android:singleLine="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:focusable="true"
+            android:descendantFocusability="afterDescendants"
+            android:paddingLeft="13.0dip"
+            android:paddingRight="13.0dip"
+            android:layout_width="fill_parent"
+            android:layout_height="46.0dip">
+            <TextView
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="奖金" />
+            <EditText
+                android:id = "@+id/bonusEditText"
+                android:layout_gravity="center"
+                android:paddingRight="22.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22.0dip"
+                android:singleLine="true" />
+        </LinearLayout>
+        <LinearLayout
+            android:focusable="true"
+            android:descendantFocusability="afterDescendants"
+            android:paddingLeft="13.0dip"
+            android:paddingRight="13.0dip"
+            android:layout_width="fill_parent"
+            android:layout_height="46.0dip">
+            <TextView
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="电话" />
+            <EditText
+                android:id = "@+id/phoneEditText"
+                android:layout_gravity="center"
+                android:paddingRight="22.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22.0dip"
+                android:singleLine="true" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:focusable="true"
+        android:descendantFocusability="afterDescendants"
+        android:paddingLeft="13.0dip"
+        android:paddingRight="13.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="46.0dip">
+        <Button
+            android:id = "@+id/newPersonSave"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="newPersonSave_Clicked"
+            android:text="确定" />
+        <Button
+            android:id = "@+id/newPersonCancel"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="newPersonCancel_Clicked"
+            android:text="取消" />
+    </LinearLayout>
+</LinearLayout>
