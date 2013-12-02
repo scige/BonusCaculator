@@ -1,6 +1,9 @@
 package com.jilinmei.bonuscalculator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,16 +15,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 public class MainActivity extends Activity {
 	
 	private static final String DEBUG_TAG = "Debug";
 
-	ArrayList<String> staffItems = null;
-	ArrayAdapter<String> adapter = null;
+	//ArrayList<String> staffItems = null;
+	//ArrayAdapter<String> adapter = null;
 	
+    List<Map<String,String>> staffItems = null;
+    SimpleAdapter adapter = null;
+        
 	DBAdapter db;
 	
     @Override
@@ -30,9 +36,14 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         
 		ListView listView = (ListView)findViewById(R.id.staffListView);
-		staffItems = new ArrayList<String>();
-		adapter = new ArrayAdapter<String>(
-				this, android.R.layout.simple_expandable_list_item_1, staffItems);
+		//staffItems = new ArrayList<String>();
+		//adapter = new ArrayAdapter<String>(
+		//		this, android.R.layout.simple_expandable_list_item_1, staffItems);
+		
+		staffItems = new ArrayList<Map<String,String>>();
+		adapter = new SimpleAdapter(this, staffItems, R.layout.list_item,
+									new String[] {"name", "income", "bonus"},
+									new int[] {R.id.list_item_name, R.id.list_item_income, R.id.list_item_bonus});
 		listView.setAdapter(adapter);
 		
         db = new DBAdapter(this);
@@ -47,8 +58,8 @@ public class MainActivity extends Activity {
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Log.d(DEBUG_TAG, "position: " + position + ", id: " + id);
 			Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-			String name = staffItems.get(position);
-			intent.putExtra("PERSON_NAME", name);
+			Map<String, String> itemMap = staffItems.get(position);
+			intent.putExtra("PERSON_NAME", itemMap.get("name"));
 			startActivity(intent);
 		}
     	
@@ -73,7 +84,14 @@ public class MainActivity extends Activity {
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
 		{
 			String name = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NAME));
-			staffItems.add(name);
+			double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));
+			double bonus = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_BONUS));
+			String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
+			Map<String, String> itemMap = new HashMap<String, String>();
+			itemMap.put("name", name);
+			itemMap.put("income", String.valueOf(income));
+			itemMap.put("bonus", String.valueOf(bonus));
+			staffItems.add(itemMap);
 		}
 		adapter.notifyDataSetChanged();
 		
