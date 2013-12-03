@@ -114,16 +114,20 @@
         <Button
             android:id = "@+id/newPersonSave"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+	        android:background="@drawable/btn_style_white"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="newPersonSave_Clicked"
+		    android:textColor="#000"
             android:text="确定" />
         <Button
             android:id = "@+id/newPersonCancel"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+	        android:background="@drawable/btn_style_white"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="newPersonCancel_Clicked"
+		    android:textColor="#000"
             android:text="取消" />
     </LinearLayout>
 </LinearLayout>

@@ -122,16 +122,20 @@
         <Button
             android:id = "@+id/editPerson"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+	        android:background="@drawable/btn_style_white"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="editPerson_Clicked"
+		    android:textColor="#000"
             android:text="修改" />
         <Button
             android:id = "@+id/removePerson"
             android:layout_weight="1"
-            android:layout_width="wrap_content"
+	        android:background="@drawable/btn_style_white"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:onClick="removePerson_Clicked"
+		    android:textColor="#000"
             android:text="删除" />
     </LinearLayout>
 </LinearLayout>

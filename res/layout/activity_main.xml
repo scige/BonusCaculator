@@ -9,7 +9,7 @@
     
 	<Button
 	    android:id="@+id/computeBonus"
-	    android:background="#36B240"
+        android:background="@drawable/btn_style_green"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:gravity="center"
@@ -17,6 +17,7 @@
 	    android:padding="4dp"
 	    android:layout_marginBottom="15dp"
 	    android:text="计算奖金"
+	    android:textColor="#FFF"
 	    android:textSize="18sp" />
 
     <LinearLayout
