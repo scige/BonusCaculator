@@ -18,9 +18,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -57,8 +57,8 @@ public class MainActivity extends Activity {
 		
     	SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
     	float allBonus = sharedPref.getFloat("all_bonus", (float)0.0);
-		TextView allBonusText = (TextView)findViewById(R.id.allBonusText);
-		allBonusText.setText(String.valueOf(allBonus));
+		Button computeBonus = (Button)findViewById(R.id.computeBonus);
+		computeBonus.setText("本月奖金：" + String.valueOf(allBonus));
     }
     
     public class MyItemClickListener implements OnItemClickListener {
@@ -94,11 +94,8 @@ public class MainActivity extends Activity {
 	
     public void onDialogPositiveClick(double allBonus) {
         // User touched the dialog's positive button
-		Toast.makeText(this, "本月奖金 [" + allBonus + "]", Toast.LENGTH_SHORT).show();
-		//Toast.makeText(this, "本月业绩 [" + totalIncome + "]", Toast.LENGTH_SHORT).show();
-		
-		TextView allBonusText = (TextView)findViewById(R.id.allBonusText);
-		allBonusText.setText(String.valueOf(allBonus));
+		Button computeBonus = (Button)findViewById(R.id.computeBonus);
+		computeBonus.setText("本月奖金：" + String.valueOf(allBonus));
 		
     	SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPref.edit();
