@@ -7,7 +7,9 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -29,7 +32,7 @@ public class MainActivity extends Activity {
 	
     List<Map<String,String>> staffItems = null;
     SimpleAdapter adapter = null;
-        
+    
 	DBAdapter db;
 	
     @Override
@@ -47,11 +50,15 @@ public class MainActivity extends Activity {
 									new String[] {"name", "income", "bonus"},
 									new int[] {R.id.list_item_name, R.id.list_item_income, R.id.list_item_bonus});
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new MyItemClickListener());
 		
         db = new DBAdapter(this);
         db.open();
-        
-		listView.setOnItemClickListener(new MyItemClickListener());
+		
+    	SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+    	float allBonus = sharedPref.getFloat("all_bonus", (float)0.0);
+		TextView allBonusText = (TextView)findViewById(R.id.allBonusText);
+		allBonusText.setText(String.valueOf(allBonus));
     }
     
     public class MyItemClickListener implements OnItemClickListener {
@@ -88,6 +95,30 @@ public class MainActivity extends Activity {
     public void onDialogPositiveClick(double allBonus) {
         // User touched the dialog's positive button
 		Toast.makeText(this, "本月奖金 [" + allBonus + "]", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "本月业绩 [" + totalIncome + "]", Toast.LENGTH_SHORT).show();
+		
+		TextView allBonusText = (TextView)findViewById(R.id.allBonusText);
+		allBonusText.setText(String.valueOf(allBonus));
+		
+    	SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putFloat("all_bonus", (float)allBonus);
+		editor.commit();
+    	
+    	float totalIncome = sharedPref.getFloat("total_income", (float)0.0);
+    	
+		Cursor cursor = db.getAllPeople();
+		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
+		{
+			String name = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NAME));
+			double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));
+			double bonus = allBonus * income / totalIncome;
+			//double bonus = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_BONUS));
+			String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
+			db.updatePerson(name, income, bonus, phone);
+		}
+		
+		onResume();
     }
 
     public void onDialogNegativeClick() {
@@ -97,20 +128,27 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		staffItems.clear();
+		double totalIncome = 0.0;
 		Cursor cursor = db.getAllPeople();
 		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
 		{
 			String name = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NAME));
 			double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));
 			double bonus = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_BONUS));
-			String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
+			//String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
 			Map<String, String> itemMap = new HashMap<String, String>();
 			itemMap.put("name", name);
 			itemMap.put("income", String.valueOf(income));
 			itemMap.put("bonus", String.valueOf(bonus));
 			staffItems.add(itemMap);
+			totalIncome += income;
 		}
 		adapter.notifyDataSetChanged();
+		
+		SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putFloat("total_income", (float)totalIncome);
+		editor.commit();
 		
 		super.onResume();
 	}
