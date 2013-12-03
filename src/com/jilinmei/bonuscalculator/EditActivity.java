@@ -67,7 +67,8 @@ public class EditActivity extends Activity {
 			income = Double.parseDouble(incomeStr);
 		}
 		catch (Exception ex) {
-			isDataOK = false;
+			//isDataOK = false;		允许输入为空
+			income = 0.0;
 		}
 		EditText bonusEdit = (EditText)findViewById(R.id.bonusEditText);
 		String bonusStr = bonusEdit.getText().toString();
@@ -76,7 +77,8 @@ public class EditActivity extends Activity {
 			bonus = Double.parseDouble(bonusStr);
 		}
 		catch (Exception ex) {
-			isDataOK = false;
+			//isDataOK = false;		允许输入为空
+			bonus = 0.0;
 		}
 		EditText phoneEdit = (EditText)findViewById(R.id.phoneEditText);
 		String phone = phoneEdit.getText().toString();
@@ -95,6 +97,11 @@ public class EditActivity extends Activity {
 			}
 			else {
 				Log.d(DEBUG_TAG, "insert");
+				Cursor cursor = db.getPerson(name);
+				if (cursor.getCount() > 0) {
+					Toast.makeText(this, "员工 [" + name + "] 已经存在，请重新输入", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				db.insertPerson(name, income, bonus, phone);
 			}
 			finish();

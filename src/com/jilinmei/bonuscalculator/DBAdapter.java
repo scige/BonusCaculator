@@ -26,7 +26,7 @@ public class DBAdapter {
 	
 	static final String SQL_CREATE_TABLE =
 			"create table staff (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-			"name TEXT, income REAL, bonus REAL," +
+			"name TEXT not null, income REAL not null, bonus REAL not null," +
 			"phone TEXT, created_at TEXT NOT NULL)";
 	
 	static final String SQL_DROP_TABLE =

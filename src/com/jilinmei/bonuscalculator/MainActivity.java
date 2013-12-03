@@ -130,17 +130,18 @@ public class MainActivity extends Activity {
 		editor.commit();
     	
     	float totalIncome = sharedPref.getFloat("total_income", (float)0.0);
-    	
-		Cursor cursor = db.getAllPeople();
-		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
-		{
-			String name = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NAME));
-			double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));
-			double bonus = allBonus * income / totalIncome;
-			bonus = Math.floor(bonus * 100 + 0.5) / 100.0;
-			String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
-			db.updatePerson(name, income, bonus, phone);
-		}
+    	if (totalIncome > 0.0) {
+			Cursor cursor = db.getAllPeople();
+			for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
+			{
+				String name = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NAME));
+				double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));
+				double bonus = allBonus * income / totalIncome;
+				bonus = Math.floor(bonus * 100 + 0.5) / 100.0;
+				String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
+				db.updatePerson(name, income, bonus, phone);
+			}
+    	}
 		
 		onResume();
     }
