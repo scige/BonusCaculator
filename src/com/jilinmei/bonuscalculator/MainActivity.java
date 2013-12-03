@@ -16,10 +16,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity
+						  implements AllBonusDialogFragment.NoticeDialogListener {
 	
 	private static final String DEBUG_TAG = "Debug";
 
@@ -82,6 +85,18 @@ public class MainActivity extends Activity {
 		DialogFragment dialogFragment = new AllBonusDialogFragment();
 		dialogFragment.show(getFragmentManager().beginTransaction(), "allbonus");
 	}
+	
+	
+    @Override
+    public void onDialogPositiveClick(double allBonus) {
+        // User touched the dialog's positive button
+		Toast.makeText(this, "±¾ÔÂ½±½ð [" + allBonus + "]", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDialogNegativeClick() {
+        // User touched the dialog's negative button
+    }
 	
 	@Override
 	protected void onResume() {
