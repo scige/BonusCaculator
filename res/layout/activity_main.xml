@@ -1,59 +1,106 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" 
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:layout_marginTop="18dp"
-    android:layout_marginBottom="10dp"
+    android:background="#EEE"
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent" >
     
-	<Button
-	    android:id="@+id/computeBonus"
-        android:background="@drawable/btn_style_green"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:gravity="center"
-	    android:onClick="computeBonus_Clicked"
-	    android:padding="4dp"
-	    android:layout_marginBottom="15dp"
-	    android:text="计算奖金"
-	    android:textColor="#FFF"
-	    android:textSize="18sp" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:background="#333"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-	    <TextView
-	        android:layout_weight="1"
-	        android:gravity="center"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:textSize="18sp"
-	        android:textColor="#FFF"
-	        android:text="姓名" />
-	    <TextView
-	        android:layout_weight="1"
-	        android:gravity="center"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:textSize="18sp"
-	        android:textColor="#FFF"
-	        android:text="业绩" />
-	    <TextView
-	        android:layout_weight="1"
-	        android:gravity="center"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:textSize="18sp"
-	        android:textColor="#FFF"
-	        android:text="奖金" />
-    </LinearLayout>
+    <RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="45dp"
+		android:id="@+id/title"
+		android:background="@drawable/title_bar"
+		android:gravity="center_vertical"  > 
+    	<TextView
+      		android:layout_width="wrap_content" 
+      		android:layout_height="wrap_content" 
+      		android:layout_centerInParent="true"
+      		android:text="奖金计算器"
+      		android:textSize="20sp"	
+			android:textColor="#ffffff" /> 
+		<Button
+		    android:id="@+id/addButton"
+		    android:background="@drawable/title_btn_right"
+	    	android:layout_width="67dp"
+      		android:layout_height="wrap_content"
+      		android:layout_alignParentRight="true" 
+      		android:layout_centerVertical="true"
+      		android:layout_marginRight="5dp"
+      		android:text="添加"
+      		android:textColor="#fff"
+      		android:textSize="15dp"
+            android:onClick="addButton_Clicked" />
+		<Button
+		    android:id="@+id/resetButton"
+		    android:background="@drawable/title_btn_right"
+	    	android:layout_width="67dp"
+      		android:layout_height="wrap_content"
+      		android:layout_alignParentLeft="true" 
+      		android:layout_centerVertical="true"
+      		android:layout_marginLeft="5dp"
+      		android:text="重置"
+      		android:textColor="#fff"
+      		android:textSize="15dp"
+            android:onClick="resetButton_Clicked" />
+	</RelativeLayout>
+	    
+	<LinearLayout
+	    android:orientation="vertical" 
+	    android:paddingLeft="10dp"
+	    android:paddingRight="10dp"
+	    android:layout_marginTop="18dp"
+	    android:layout_marginBottom="10dp"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content" >
     
-    <ListView
-        android:id="@+id/staffListView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+		<Button
+		    android:id="@+id/computeBonus"
+	        android:background="@drawable/btn_style_green"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:gravity="center"
+		    android:onClick="computeBonus_Clicked"
+		    android:padding="4dp"
+		    android:layout_marginBottom="15dp"
+		    android:text="计算奖金"
+		    android:textColor="#FFF"
+		    android:textSize="18sp" />
+	
+	    <LinearLayout
+	        android:orientation="horizontal"
+	        android:background="#0C90C6"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content">
+		    <TextView
+		        android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:textSize="18sp"
+		        android:textColor="#FFF"
+		        android:text="姓名" />
+		    <TextView
+		        android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:textSize="18sp"
+		        android:textColor="#FFF"
+		        android:text="业绩" />
+		    <TextView
+		        android:layout_weight="1"
+		        android:gravity="center"
+		        android:layout_width="0dp"
+		        android:layout_height="wrap_content"
+		        android:textSize="18sp"
+		        android:textColor="#FFF"
+		        android:text="奖金" />
+	    </LinearLayout>
+	    
+	    <ListView
+	        android:id="@+id/staffListView"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content" />
+	    
+	</LinearLayout>
     
 </LinearLayout>

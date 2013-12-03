@@ -43,6 +43,10 @@ public class DetailActivity extends Activity
 		dialogFragment.show(getFragmentManager().beginTransaction(), "removeperson");
 	}
 	
+	public void backButton_Clicked(View view) {
+		finish();
+	}
+	
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         // User touched the dialog's positive button
@@ -57,7 +61,7 @@ public class DetailActivity extends Activity
     public void onDialogNegativeClick(DialogFragment dialog) {
         // User touched the dialog's negative button
     }
-	
+    
 	protected void onResume() {
 		Cursor cursor = db.getPerson(name);
 		double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));

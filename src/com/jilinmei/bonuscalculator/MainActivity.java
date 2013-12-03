@@ -14,7 +14,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -77,6 +76,7 @@ public class MainActivity extends Activity {
     	
     }
     
+    /*
     @Override
 	public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
@@ -91,6 +91,17 @@ public class MainActivity extends Activity {
     	default:
     		return super.onOptionsItemSelected(item);
     	}
+	}
+	*/
+    
+	public void addButton_Clicked(View view) {
+		Intent intent = new Intent(MainActivity.this, EditActivity.class);
+		startActivity(intent);
+	}
+	
+	public void resetButton_Clicked(View view) {
+   		DialogFragment dialogFragment = new ResetConfirmDialogFragment();
+   		dialogFragment.show(getFragmentManager().beginTransaction(), "resetconfirm");
 	}
     
 	public void computeBonus_Clicked(View view) {

@@ -82,6 +82,10 @@ public class EditActivity extends Activity {
 	public void newPersonCancel_Clicked(View view) {
 		finish();
 	}
+	
+	public void backButton_Clicked(View view) {
+		finish();
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

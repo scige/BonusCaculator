@@ -1,7 +1,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" 
+    android:background="#EEE"
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent" >
+    
+    <RelativeLayout 
+		android:layout_width="fill_parent"
+		android:layout_height="45dp"
+		android:id="@+id/title" 
+		android:background="@drawable/title_bar"
+		android:gravity="center_vertical"  >  
+    	<TextView
+      		android:layout_width="wrap_content" 
+      		android:layout_height="wrap_content" 
+      		android:layout_centerInParent="true"
+      		android:text="编辑信息"
+      		android:textSize="20sp"	
+			android:textColor="#ffffff" /> 
+		<Button
+		    android:id="@+id/resetButton"
+		    android:background="@drawable/title_btn_back"
+	    	android:layout_width="67dp"
+      		android:layout_height="wrap_content"
+      		android:layout_alignParentLeft="true" 
+      		android:layout_centerVertical="true"
+      		android:layout_marginLeft="5dp"
+      		android:text="返回"
+      		android:textColor="#fff"
+      		android:textSize="15dp"
+            android:onClick="backButton_Clicked" />
+	</RelativeLayout>
+	
     <LinearLayout
         android:orientation="vertical"
         android:paddingLeft="10.0dip"
@@ -104,6 +133,7 @@
                 android:singleLine="true" />
         </LinearLayout>
     </LinearLayout>
+    
     <LinearLayout
         android:focusable="true"
         android:descendantFocusability="afterDescendants"
@@ -119,6 +149,7 @@
             android:layout_height="wrap_content"
             android:onClick="newPersonSave_Clicked"
 		    android:textColor="#000"
+		    android:textSize="16sp"
             android:text="确定" />
         <Button
             android:id = "@+id/newPersonCancel"
@@ -128,6 +159,8 @@
             android:layout_height="wrap_content"
             android:onClick="newPersonCancel_Clicked"
 		    android:textColor="#000"
+		    android:textSize="16sp"
             android:text="取消" />
     </LinearLayout>
+    
 </LinearLayout>
