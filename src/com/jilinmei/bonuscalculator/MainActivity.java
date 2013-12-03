@@ -21,7 +21,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -58,7 +57,11 @@ public class MainActivity extends Activity {
     	SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
     	float allBonus = sharedPref.getFloat("all_bonus", (float)0.0);
 		Button computeBonus = (Button)findViewById(R.id.computeBonus);
-		computeBonus.setText("本月奖金：" + String.valueOf(allBonus));
+		Log.d(DEBUG_TAG, "bonus: " + allBonus);
+		if (allBonus == 0.0)
+			computeBonus.setText("计算奖金");
+		else
+			computeBonus.setText("本月奖金：" + String.valueOf(allBonus));
     }
     
     public class MyItemClickListener implements OnItemClickListener {
@@ -80,6 +83,10 @@ public class MainActivity extends Activity {
     	case R.id.action_add:
 			Intent intent = new Intent(MainActivity.this, EditActivity.class);
 			startActivity(intent);
+    		return true;
+    	case R.id.action_reset:
+    		DialogFragment dialogFragment = new ResetConfirmDialogFragment();
+    		dialogFragment.show(getFragmentManager().beginTransaction(), "resetconfirm");
     		return true;
     	default:
     		return super.onOptionsItemSelected(item);
@@ -120,6 +127,28 @@ public class MainActivity extends Activity {
 
     public void onDialogNegativeClick() {
         // User touched the dialog's negative button
+    }
+    
+    public void onResetDialogPositiveClick() {
+    	SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sharedPref.edit();
+		editor.putFloat("all_bonus", (float)0.0);
+		editor.commit();
+		
+		Button computeBonus = (Button)findViewById(R.id.computeBonus);
+		computeBonus.setText("计算奖金");
+		
+		Cursor cursor = db.getAllPeople();
+		for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext())
+		{
+			String name = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NAME));
+			String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
+			db.updatePerson(name, 0.0, 0.0, phone);
+		}
+		onResume();
+    }
+    
+    public void onResetDialogNegativeClick() {
     }
 	
 	@Override

@@ -9,6 +9,7 @@
     
 	<Button
 	    android:id="@+id/computeBonus"
+	    android:background="#36B240"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:gravity="center"
@@ -20,28 +21,32 @@
 
     <LinearLayout
         android:orientation="horizontal"
+        android:background="#333"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 	    <TextView
 	        android:layout_weight="1"
+	        android:gravity="center"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:textSize="18sp"
-	        android:textColor="#555"
+	        android:textColor="#FFF"
 	        android:text="姓名" />
 	    <TextView
 	        android:layout_weight="1"
+	        android:gravity="center"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:textSize="18sp"
-	        android:textColor="#555"
+	        android:textColor="#FFF"
 	        android:text="业绩" />
 	    <TextView
 	        android:layout_weight="1"
+	        android:gravity="center"
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:textSize="18sp"
-	        android:textColor="#555"
+	        android:textColor="#FFF"
 	        android:text="奖金" />
     </LinearLayout>
     

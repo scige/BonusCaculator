@@ -4,6 +4,7 @@
     android:orientation="horizontal">
     <TextView android:id="@+id/list_item_name"
         android:layout_weight="1"
+        android:gravity="center"
         android:textSize="18sp"
         android:textColor="#555"
         android:paddingTop="15dp"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content" />
     <TextView android:id="@+id/list_item_income"
         android:layout_weight="1"
+        android:gravity="center"
         android:textSize="18sp"
         android:textColor="#555"
         android:paddingTop="15dp"
@@ -20,6 +22,7 @@
         android:layout_height="wrap_content" />
     <TextView android:id="@+id/list_item_bonus"
         android:layout_weight="1"
+        android:gravity="center"
         android:textSize="18sp"
         android:textColor="#555"
         android:paddingTop="15dp"
