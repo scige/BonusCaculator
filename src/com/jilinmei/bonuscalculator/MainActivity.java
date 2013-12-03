@@ -20,6 +20,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -57,10 +58,12 @@ public class MainActivity extends Activity {
     	float allBonus = sharedPref.getFloat("all_bonus", (float)0.0);
 		Button computeBonus = (Button)findViewById(R.id.computeBonus);
 		Log.d(DEBUG_TAG, "bonus: " + allBonus);
-		if (allBonus == 0.0)
+		if (allBonus == 0.0) {
 			computeBonus.setText("计算奖金");
-		else
+		}
+		else {
 			computeBonus.setText("本月奖金：" + String.valueOf(allBonus));
+		}
     }
     
     public class MyItemClickListener implements OnItemClickListener {
@@ -113,7 +116,13 @@ public class MainActivity extends Activity {
     public void onDialogPositiveClick(double allBonus) {
         // User touched the dialog's positive button
 		Button computeBonus = (Button)findViewById(R.id.computeBonus);
-		computeBonus.setText("本月奖金：" + String.valueOf(allBonus));
+		if (allBonus == 0.0) {
+			computeBonus.setText("计算奖金");
+			Toast.makeText(this, "输入本月奖金有错误，请重新输入", Toast.LENGTH_SHORT).show();
+		}
+		else {
+			computeBonus.setText("本月奖金：" + String.valueOf(allBonus));
+		}
 		
     	SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sharedPref.edit();
@@ -128,7 +137,7 @@ public class MainActivity extends Activity {
 			String name = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_NAME));
 			double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));
 			double bonus = allBonus * income / totalIncome;
-			//double bonus = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_BONUS));
+			bonus = Math.floor(bonus * 100 + 0.5) / 100.0;
 			String phone = cursor.getString(cursor.getColumnIndex(DBAdapter.COLUMN_PHONE));
 			db.updatePerson(name, income, bonus, phone);
 		}

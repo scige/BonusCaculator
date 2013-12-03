@@ -61,6 +61,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22.0dip"
+                android:inputType="text"
                 android:singleLine="true" />
         </LinearLayout>
         <LinearLayout
@@ -84,6 +85,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22.0dip"
+                android:inputType="numberDecimal"
+                android:numeric="decimal"
                 android:singleLine="true" />
         </LinearLayout>
         <LinearLayout
@@ -107,6 +110,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22.0dip"
+                android:inputType="numberDecimal"
+                android:numeric="decimal"
                 android:singleLine="true" />
         </LinearLayout>
         <LinearLayout
@@ -130,6 +135,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="22.0dip"
+                android:inputType="phone"
+                android:numeric="integer"
                 android:singleLine="true" />
         </LinearLayout>
     </LinearLayout>

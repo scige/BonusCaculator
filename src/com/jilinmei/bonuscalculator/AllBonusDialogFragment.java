@@ -1,6 +1,5 @@
 package com.jilinmei.bonuscalculator;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AllBonusDialogFragment extends DialogFragment {
 	
@@ -31,7 +31,13 @@ public class AllBonusDialogFragment extends DialogFragment {
 			// TODO Auto-generated method stub
 			EditText allBonusEdit = (EditText)view.findViewById(R.id.inputDialogEdit);
             String allBonusStr = allBonusEdit.getText().toString();
-            double allBonus = Double.parseDouble(allBonusStr);
+            double allBonus = 0.0;
+            try {
+            	allBonus = Double.parseDouble(allBonusStr);
+            }
+            catch (Exception ex) {
+            	allBonus = 0.0;
+            }
             ((MainActivity)getActivity()).onDialogPositiveClick(allBonus);
 		}
     }

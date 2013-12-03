@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class EditActivity extends Activity {
 
@@ -34,7 +35,7 @@ public class EditActivity extends Activity {
         	Log.i(DEBUG_TAG, "running in adding person mode");
         }
         
-        if (name == "") {
+        if (name.equals("")) {
         	isEdit = false;
         	return;
         }
@@ -56,27 +57,51 @@ public class EditActivity extends Activity {
 	}
 	
 	public void newPersonSave_Clicked(View view) {
+		boolean isDataOK = true;
 		EditText nameEdit = (EditText)findViewById(R.id.nameEditText);
 		String name = nameEdit.getText().toString();
 		EditText incomeEdit = (EditText)findViewById(R.id.incomeEditText);
 		String incomeStr = incomeEdit.getText().toString();
-		double income = Double.parseDouble(incomeStr);
+		double income = 0.0;
+		try {
+			income = Double.parseDouble(incomeStr);
+		}
+		catch (Exception ex) {
+			isDataOK = false;
+		}
 		EditText bonusEdit = (EditText)findViewById(R.id.bonusEditText);
 		String bonusStr = bonusEdit.getText().toString();
-		double bonus = Double.parseDouble(bonusStr);
+		double bonus = 0.0;
+		try {
+			bonus = Double.parseDouble(bonusStr);
+		}
+		catch (Exception ex) {
+			isDataOK = false;
+		}
 		EditText phoneEdit = (EditText)findViewById(R.id.phoneEditText);
 		String phone = phoneEdit.getText().toString();
 		
-		if (isEdit) {
-			Log.d(DEBUG_TAG, "update");
-			db.updatePerson(name, income, bonus, phone);
+		if (isDataOK && name.equals(""))
+			isDataOK = false;
+		if (isDataOK && income < 0.0)
+			isDataOK = false;
+		if (isDataOK && bonus < 0.0)
+			isDataOK = false;
+	    
+		if (isDataOK) {
+			if (isEdit) {
+				Log.d(DEBUG_TAG, "update");
+				db.updatePerson(name, income, bonus, phone);
+			}
+			else {
+				Log.d(DEBUG_TAG, "insert");
+				db.insertPerson(name, income, bonus, phone);
+			}
+			finish();
 		}
 		else {
-			Log.d(DEBUG_TAG, "insert");
-			db.insertPerson(name, income, bonus, phone);
+			Toast.makeText(this, "输入员工信息有错误，请重新输入", Toast.LENGTH_SHORT).show();
 		}
-	    
-	    finish();
 	}
 	
 	public void newPersonCancel_Clicked(View view) {
