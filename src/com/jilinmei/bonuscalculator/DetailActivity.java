@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 public class DetailActivity extends Activity
 							implements RemovePersonDialogFragment.NoticeDialogListener {
 
@@ -62,6 +64,7 @@ public class DetailActivity extends Activity
         // User touched the dialog's negative button
     }
     
+	@Override
 	protected void onResume() {
 		Cursor cursor = db.getPerson(name);
 		double income = cursor.getDouble(cursor.getColumnIndex(DBAdapter.COLUMN_INCOME));
@@ -78,6 +81,13 @@ public class DetailActivity extends Activity
 		phoneText.setText(phone);
 		
 		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+
 public class EditActivity extends Activity {
 
 	private static final String DEBUG_TAG = "Debug";
@@ -117,6 +119,18 @@ public class EditActivity extends Activity {
 	
 	public void backButton_Clicked(View view) {
 		finish();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override

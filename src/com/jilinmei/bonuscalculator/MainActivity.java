@@ -22,6 +22,9 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
+
 public class MainActivity extends Activity {
 	
 	private static final String DEBUG_TAG = "Debug";
@@ -64,6 +67,9 @@ public class MainActivity extends Activity {
 		else {
 			computeBonus.setText("±¾ÔÂ½±½ð£º" + String.valueOf(allBonus));
 		}
+		
+		UmengUpdateAgent.update(this);
+		MobclickAgent.setDebugMode(true);
     }
     
     public class MyItemClickListener implements OnItemClickListener {
@@ -198,6 +204,13 @@ public class MainActivity extends Activity {
 		editor.commit();
 		
 		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 
 	@Override
